@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <div class="mainSlide">
+        <div class="wrap">
+            <div class="wrap_content" id="title">
+                <p style=" font-size:2vw; color: #6b6a6a;">멋쟁이 사자처럼 계명대학교</p>
+                <p style=" font-family: 'NanumSquare', sans-serif; font-weight: 900; font-size:6vw;"><span style="color:#e9b655 ;">LIKELION</span><span style="color:#8f8d8d;">x</span><span style="color: #0068b7;">KMU</span></p>
+            </div>
+            <img src="{% static 'img/1.png' %}" alt="banner" id="main">
+    
+            <!-- <div class="wrap_content" id="content">
+                <p> <b>자체 개발된 온라인 강의 플랫폼'클래스 라이언'</b>을 통해 강의를 듣고 과제를 수행합니다.</p>
+                <P>다양한 오프라인 활동과 병행하여 뜻을 같이하는 동료를 찾고, <b>자신이 만들고자 하는</b></P>
+                <P> <b>서비스를 직접 프로그래밍</b> 하도록 돕습니다.</P>
+            </div> -->
+        </div>
+    </div>
+    <div class="mainGoPost">
+        <h2> 최근에 올라온 글</h2>
+        <br>
+        <ul>
+            <li class="postCard">
+                <a href="{% url 'free' %}"><h3 style="font-weight: bolder;">자유게시판</h3></a>
+                {% for crud in cruds %}
+                    <div class="freeGoPost">
+                        <a href="{% url 'detail' crud.id %}"><p>{{ crud.title }}</p></a>
+                    </div>
+                {% endfor %}
+            </li>
+            <li class="postCard">
+                <a href="{% url 'infoList' %}"><h3 style="font-weight: bolder;">정보게시판</h3></a>
+                {% for info in infos.all %}
+                    <div class="freeGoPost">
+                        <a href="{% url 'infoDetail' info.id %}"><p>{{ info.title }}</p></a>
+                    </div>
+                {% endfor %}
+            </li>
+            <li class="postCard">
+                <a href="{% url 'qnaList' %}"><h3 style="font-weight: bolder;">질문게시판</h3></a>
+                {% for qna in qnas.all %}
+                    <div class="freeGoPost">
+                        <a href="{% url 'qnaDetail' qna.id %}"><p>{{ qna.title }}</p></a>
+                    </div>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+</body>
+    
+{% endblock %}

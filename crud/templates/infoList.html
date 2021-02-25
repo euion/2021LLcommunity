@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for info in infos.all %}
+    <div class="container">
+        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.title }}</h2></a>
+    </div>    
+    {% endfor %}
+    <div><a href="{% url 'infoNew' %}">글쓰기</a></div>
+{% endblock %}

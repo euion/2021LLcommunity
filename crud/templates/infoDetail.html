@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="containter">
+        <h2>{{ info.title }}</h2>
+        <p>{{ info.pub_date }}</p>
+        <p>{{ info.body }}</p>
+        <a href="{% url 'infoList' %}">돌아가기</a>
+        <div class="freeDelete">
+            <p><a href = "{% url 'infoDelete' info.id %}">삭제</a></p>
+        </div>
+        <div class="freeEdit">
+            <p><a href = "{% url 'infoEdit' info.id %}">수정하기</a></p>
+        </div>
+    </div>
+{% endblock %}

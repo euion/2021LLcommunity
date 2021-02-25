@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% for crud in cruds.all %}
+        <div class="container">
+            <a href="{% url 'detail' crud.id %}"><h2>{{ crud.title }}</h2></a>
+        </div>
+    {% endfor %}
+    <div><a href="{% url 'new' %}">글쓰기</a></div>
+{% endblock %}

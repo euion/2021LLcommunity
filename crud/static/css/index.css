@@ -1,0 +1,64 @@
+
+/*mainslide*/
+.wrap{
+    font-family: 'NanumSquare',sans-serif;
+    position: relative;
+}
+img{
+    max-width: 100%;
+    display: block;
+    
+}
+.wrap_content{ 
+    /* border: solid 3px blue; */
+    position: absolute;            
+}
+p{margin: 0;}
+
+span{padding: 3px;}
+
+#title{
+    left: 28%;
+    top: 30%;
+}
+/* #title p{
+    text-align: center;
+} */
+
+#content{
+    font-size: 1.5vw;
+    color: #60503f;
+    width: 60%;
+    top: 90%;
+    left:22%;
+    text-align: center;
+    line-height: 2;
+}
+
+/*mainGoPost*/
+.mainGoPost{
+    padding: 2vw;
+    background-color: rgba(128, 128, 128, 0.63);
+}
+.mainGoPost h2{
+    text-align: center;
+}
+.mainGoPost ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.postCard{
+    padding: 2vw 10vw 2vw 10vw;
+    background-color: rgba(255, 255, 255, 0.479);
+}
+.postCard  a p3{
+    padding: 2px;
+
+}
+@media screen and(max-width:700px){
+    .postCard{
+        padding: 3vw;
+        background-color: rgba(255, 255, 255, 0.479);
+    }
+}

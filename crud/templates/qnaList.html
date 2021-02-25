@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for qna in qnas.all %}
+    <div class="container">
+        <a href="{% url 'qnaDetail' qna.id %}"><h2>{{ qna.title }}</h2></a>
+    </div>
+    {% endfor %}
+    <div><a href="{% url 'qnaNew' %}">글쓰기</a></div>
+{% endblock %}
