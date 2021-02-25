@@ -21,7 +21,7 @@ def index(request):
 
 # 자유게시판~~
 def free(request):
-    cruds = Crud.objects
+    cruds = Crud.objects.all().order_by('-pub_date')
     return render(request, 'free.html', {'cruds':cruds})
     
 def detail(request, crud_id):
@@ -67,7 +67,7 @@ def edit(request, crud_id):
 
 # 정보게시판~~
 def infoList(request):
-    infos = Info.objects
+    infos = Info.objects.all().order_by('-pub_date')
     return render(request, 'infoList.html', {'infos':infos})
 
 def infoDetail(request, info_id):
@@ -110,7 +110,7 @@ def infoEdit(request, info_id):
 
 # 질문 게시판~~
 def qnaList(request):
-    qnas = Qna.objects
+    qnas = Qna.objects.all().order_by('-pub_date')
     return render(request,'qnaList.html', {'qnas': qnas})
 
 def qnaDetail(request, qna_id):

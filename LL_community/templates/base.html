@@ -11,32 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>멋쟁이 사자처럼 :: 계명대</title>
     <style>
-        /* 마지막장 사진 */
-        .lastPage{
-            margin: 0;
-            width: 70%;
-            vertical-align: middle;
-            position: absolute;
-        }
-        .lastSentence{
-        text-align: left;
-        position: absolute;
-        left: 35vw;
-        transform:translate( -50%, 60%);
-        font-size: 1.2vmax;
-        }
-        @media screen and (max-width:700px) {
-            .lastSentence{
-            text-align: left;
-            position: absolute;
-            left: 40vw;
-            transform:translate( -50%, 60%);
-            font-size: 1.2vmax;
-            }
-        }
-        .lastPage img{
-            display: block;
-        }       
     </style>
 </head>
 <body>
@@ -66,30 +40,5 @@
             {% block content %}
             {% endblock %}
     </main>
-    <footer>
-        <div class = "lastPageWrap">
-            <div class ="lastPage">
-                <img src="{% static 'img/4.png' %}" alt="" loading="lazy">
-            </div>
-            <div class ="lastSentence">
-                <p>
-                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
-                </p>
-                <p>
-                    INSTAGRAM : kmu_likelion
-                </p>
-                <p>
-                    EMAIL : qq212420@gmail.com
-                </p>
-                <br>
-                <p>
-                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
-                </p>
-                <p>
-                    ALL RIGHTS RESERVED
-                </p>
-            </div>
-        </div>    
-    </footer>
 </body>
 </html>

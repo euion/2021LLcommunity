@@ -1,10 +1,38 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    {% for info in infos.all %}
-    <div class="container">
-        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.title }}</h2></a>
-    </div>    
-    {% endfor %}
-    <div><a href="{% url 'infoNew' %}">글쓰기</a></div>
-{% endblock %}
+    <head>
+        
+    </head>
+    <body>
+        <table class="tableContainer">
+            <thead>
+                <td>#</td><td>title</td><td>작성자</td>
+            </thead>
+            {% for info in infos.all %}
+            <tbody>
+                <td>{{ info.id }}</td>
+                <td>
+                    <div class="container">
+                        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.title }}</h2></a>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.name }}</h2></a>
+                    </div>
+                </td>
+            </tbody>
+            {% endfor %}
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <div><a href="{% url 'infoNew' %}">글쓰기</a></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+    
+{% endblock %} 
+    

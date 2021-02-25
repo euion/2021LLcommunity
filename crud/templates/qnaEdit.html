@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
     <div class="container">
         {% csrf_token %}
@@ -10,4 +10,29 @@
         <input class="btn btn-dark" type="submit" value="수정하기">
     </form>
     </div>
+    <footer>
+        <div class = "lastPageWrap">
+            <div class ="lastPage">
+                <img src="{% static 'img/4.png' %}" alt="" loading="lazy">
+            </div>
+            <div class ="lastSentence">
+                <p>
+                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
+                </p>
+                <p>
+                    INSTAGRAM : kmu_likelion
+                </p>
+                <p>
+                    EMAIL : qq212420@gmail.com
+                </p>
+                <br>
+                <p>
+                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
+                </p>
+                <p>
+                    ALL RIGHTS RESERVED
+                </p>
+            </div>
+        </div>    
+    </footer>  
 {% endblock %}
