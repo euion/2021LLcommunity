@@ -6,6 +6,7 @@
             <h2>{{ qna.title }}</h2>
             <p>{{ qna.pub_date }}</p>
             <p>{{ qna.body }}</p>
+            <p>{{ qna.name }}</p>
             <a href="{% url 'qnaList' %}">돌아가기</a>
             <div class="freeDelete">
                 <p><a href = "{% url 'qnaDelete' qna.id %}">삭제</a></p>

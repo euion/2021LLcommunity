@@ -6,6 +6,7 @@
         <h2>{{ info.title }}</h2>
         <p>{{ info.pub_date }}</p>
         <p>{{ info.body }}</p>
+        <p>{{ info.name }}</p>
         <a href="{% url 'infoList' %}">돌아가기</a>
         <div class="freeDelete">
             <p><a href = "{% url 'infoDelete' info.id %}">삭제</a></p>

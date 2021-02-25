@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="{% static 'css/base.css' %}">
+    <!--font list-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <title>멋쟁이 사자처럼 :: 계명대</title>
+    <style>
+        /* 마지막장 사진 */
+        .lastPage{
+            margin: 0;
+            width: 70%;
+            vertical-align: middle;
+            position: absolute;
+        }
+        .lastSentence{
+        text-align: left;
+        position: absolute;
+        left: 35vw;
+        transform:translate( -50%, 60%);
+        font-size: 1.2vmax;
+        }
+        @media screen and (max-width:700px) {
+            .lastSentence{
+            text-align: left;
+            position: absolute;
+            left: 40vw;
+            transform:translate( -50%, 60%);
+            font-size: 1.2vmax;
+            }
+        }
+        .lastPage img{
+            display: block;
+        }       
+    </style>
+</head>
+<body>
+    <div class="allNav">
+        <header>
+            <div class="topHeader">
+                <a href="{% url 'index' %}"><img src="{% static 'img/LLlogo.png' %}" style="width: 300px;" id="logo"></a>
+                <div></div>
+                <ul>
+                    <li id="login"><a href="#" >로그인</a></li>
+                    <li id="signup"><a href="#">회원가입</a></li>
+                </ul>
+            </div>
+        </header>
+        <nav>
+            <div class="bottomHeader">
+                <ul>
+                    <li><a href="http://kelmyung.likelion.org/">계명대 멋사 소개</a></li>
+                    <li><a href="{% url 'free' %}">자유게시판</a></li>
+                    <li><a href="{% url 'qnaList' %}">질문게시판</a></li>
+                    <li><a href="{% url 'infoList' %}">정보게시판</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <main>
+            {% block content %}
+            {% endblock %}
+    </main>
+    <footer>
+        <div class = "lastPageWrap">
+            <div class ="lastPage">
+                <img src="{% static 'img/4.png' %}" alt="" loading="lazy">
+            </div>
+            <div class ="lastSentence">
+                <p>
+                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
+                </p>
+                <p>
+                    INSTAGRAM : kmu_likelion
+                </p>
+                <p>
+                    EMAIL : qq212420@gmail.com
+                </p>
+                <br>
+                <p>
+                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
+                </p>
+                <p>
+                    ALL RIGHTS RESERVED
+                </p>
+            </div>
+        </div>    
+    </footer>
+</body>
+</html>

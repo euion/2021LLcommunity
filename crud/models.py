@@ -4,6 +4,7 @@ from django.db import models
 
 class Crud(models.Model):
     title = models.CharField(max_length=200)
+    name = models.CharField(max_length=50, null=True)
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
     #image = models.ImageField(upload_to="media/freeImages/")
@@ -13,6 +14,7 @@ class Crud(models.Model):
 
 class Info(models.Model):
     title = models.CharField(max_length=200)
+    name = models.CharField(max_length=50 , null=True )
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
 
@@ -21,8 +23,9 @@ class Info(models.Model):
 
 class Qna(models.Model):
     title = models.CharField(max_length=200)
+    name = models.CharField(max_length=50 , null=True)
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
-
+    
     def __str__(self):
         return self.title

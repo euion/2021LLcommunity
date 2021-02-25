@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}    
 {% block content %}
-    <header>
-
-    </header>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/detail.css'%}">
+    </head>
     <body>
-
             <div class="containter">
                 <h2>{{ crud.title }}</h2>
                 <p>{{ crud.pub_date }}</p>
                 <p>{{ crud.body }}</p>
+                <p>{{ crud.name }}</p>
                 <a href="{% url 'free' %}">돌아가기</a>
                 <div class="freeDelete">
                     <p><a href = "{% url 'delete' crud.id %}">삭제</a></p>

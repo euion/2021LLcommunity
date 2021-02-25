@@ -38,6 +38,7 @@ def create(request):
     crud = Crud()
     crud.title = request.GET['title']
     crud.body = request.GET['body']
+    crud.name = request.GET['name']
     crud.pub_date = timezone.datetime.now()
     crud.save()
     return redirect('/crud/' + str(crud.id))
@@ -55,6 +56,7 @@ def edit(request, crud_id):
         if form.is_valid():
             crud.title = form.cleaned_data['title']
             crud.body = form.cleaned_data['body']
+            crud.name = request.GET['name']
             crud.pub_date=timezone.now()
             crud.save()
             return redirect('/detail/' + str(crud.id))
@@ -79,6 +81,7 @@ def infoCreate(request):
     info = Info()
     info.title = request.GET['title']
     info.body = request.GET['body']
+    info.name = request.GET['name']
     info.pub_date = timezone.datetime.now()
     info.save()
     return redirect('/info/' + str(info.id))
@@ -96,6 +99,7 @@ def infoEdit(request, info_id):
         if form.is_valid():
             info.title = form.cleaned_data['title']
             info.body = form.cleaned_data['body']
+            info.name = request.GET['name']
             info.pub_date=timezone.now()
             info.save()
             return redirect('/infoDetail/' + str(info.id))
@@ -117,6 +121,7 @@ def qnaCreate(request):
     qna = Qna()
     qna.title = request.GET['title']
     qna.body = request.GET['body']
+    qna.name = request.GET['name']
     qna.pub_date = timezone.datetime.now()
     qna.save()
     return redirect('/qna/' + str(qna.id))
@@ -134,6 +139,7 @@ def qnaEdit(request, qna_id):
         if form.is_valid():
             qna.title = form.cleaned_data['title']
             qna.body = form.cleaned_data['body']
+            qna.name = request.GET['name']
             qna.pub_date=timezone.now()
             qna.save()
             return redirect('/qnaDetail/' + str(qna.id))
