@@ -1,0 +1,28 @@
+table{
+    width: 100%;
+    padding: 10px;
+}
+thead{
+}
+tbody:hover{
+    background-color: rgba(7, 7, 7, 0.082);
+    border-color: rgba(7, 7, 7, 0.082);
+}
+tfoot{
+    text-align: center;
+}
+.writePost{
+    display: inline;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(245, 192, 94);
+}
+.writePost a{
+    color: white;
+}
+.writePost:hover{
+    color: white;
+    background-color: rgb(168, 134, 71);
+}

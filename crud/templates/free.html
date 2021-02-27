@@ -3,87 +3,41 @@
 {% block content %}
 <head>
     <link rel="stylesheet" href="{% static 'css/free.css' %}">
-    <style>
-        .lastPage{
-        margin: 0;
-        width: 70%;
-        vertical-align: middle;
-        position: absolute;
-        }
-        .lastSentence{
-            text-align: left;
-            position: absolute;
-            left: 35vw;
-            transform:translate( -50%, 60%);
-            font-size: 1.2vmax;
-        }
-        @media screen and (max-width:700px) {
-                .lastSentence{
-                text-align: left;
-                position: absolute;
-                left: 40vw;
-                transform:translate( -50%, 60%);
-                font-size: 1.2vmax;
-            }
-        }
-        .lastPage img{
-            display: block;
-        }      
-    </style>
 </head>
 <body>
-    <table class="tableContainer">
-        <thead>
-            <td>#</td><td>title</td><td>작성자</td>
-        </thead>
-        {% for crud in cruds.all %}
-        <tbody>
-            <td>{{ crud.id }}</td>
-            <td>
-                <div class="container">
-                    <a href="{% url 'detail' crud.id %}"><h2>{{ crud.title }}</h2></a>
-                </div>
-            </td>
-            <td>
-                <div class="container">
-                    <a href="{% url 'detail' crud.id %}"><h2>{{ crud.name }}</h2></a>
-                </div>
-            </td>
-        </tbody>
-        {% endfor %}
-        <tfoot>
-            <tr>
-                <td colspan="3" textalign="center">
-                    <div><a href="{% url 'new' %}">글쓰기</a></div>
+    <div class="tableBody">
+        <table class="tableContainer" >
+            <thead>
+                <td><h2>#</h2></td>
+                <td style="width: 80%;"><h2>title</h2></td>
+                <td><h2>작성자</h2></td>
+            </thead>
+            {% for crud in cruds.all %}
+            <tbody>
+                <td style="text-align: center;">{{ crud.id }}</td>
+                <td>
+                    <div class="container">
+                        <a href="{% url 'detail' crud.id %}"><h4 style="padding-left: 10px;">{{ crud.title }}</h4></a>
+                    </div>
                 </td>
-            </tr>
-        </tfoot>
-    </table>
-    <footer>
-        <div class = "lastPageWrap">
-            <div class ="lastPage">
-                <img src="{% static 'img/4.png' %}" alt="" loading="lazy">
-            </div>
-            <div class ="lastSentence">
-                <p>
-                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
-                </p>
-                <p>
-                    INSTAGRAM : kmu_likelion
-                </p>
-                <p>
-                    EMAIL : qq212420@gmail.com
-                </p>
-                <br>
-                <p>
-                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
-                </p>
-                <p>
-                    ALL RIGHTS RESERVED
-                </p>
-            </div>
-        </div>    
-    </footer>
+                <td  style="text-align: center;">
+                    <div class="container">
+                        <a href="{% url 'detail' crud.id %}"><h4>{{ crud.name }}</h4></a>
+                    </div>
+                </td>
+            </tbody>
+            {% endfor %}
+            <tfoot>
+                <td colspan="3">
+                    <div class="writePost" >
+                        <a href="{% url 'new' %}">글쓰기</a>
+                    </div>
+                </td>
+            </tfoot>
+        </table>
+
+    </div>
+    
 </body> 
 {% endblock %} 
     

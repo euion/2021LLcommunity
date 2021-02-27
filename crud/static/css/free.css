@@ -1,25 +1,40 @@
-.lastPage{
-    margin: 0;
-    width: 70%;
-    vertical-align: middle;
-    position: absolute;
+.tableBody{
+    background-color: rgba(97, 97, 97, 0.062);
 }
-.lastSentence{
-    text-align: left;
-    position: absolute;
-    left: 35vw;
-    transform:translate( -50%, 60%);
-    font-size: 1.2vmax;
+table{
+    width: 100%;
 }
-@media screen and (max-width:700px) {
-        .lastSentence{
-        text-align: left;
-        position: absolute;
-        left: 40vw;
-        transform:translate( -50%, 60%);
-        font-size: 1.2vmax;
-    }
+thead{
+    text-align: center;
 }
-.lastPage img{
-    display: block;
-}      
+table td{
+    border-left: 0.2px solid  rgba(7, 7, 7, 0.329);
+    border-bottom: 0.2px solid  rgba(7, 7, 7, 0.329);
+}
+table h4{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+tbody:hover{
+    background-color: rgba(7, 7, 7, 0.082);
+    border-color: rgba(7, 7, 7, 0.082);
+}
+tfoot td{
+    padding: 20px;
+    text-align: center;
+}
+.writePost{
+    display: inline;
+    justify-content: center;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(245, 192, 94);
+}
+.writePost a{
+    color: white;
+}
+.writePost:hover{
+    color: white;
+    background-color: rgb(168, 134, 71);
+}

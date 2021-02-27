@@ -49,6 +49,47 @@
         {% block content %}
         {% endblock %}
     </main>
+    <footer style="margin-top: 20px;">
+        <div class = "lastPageWrap" style="    position: relative;">
+            <div class ="lastPage"
+                style="margin: 0;
+                vertical-align: middle;">
+                <img src="{% static 'img/4.png' %}" style=" position: absolute; width: 70%; display: block;" alt="" loading="lazy">
+            </div>
+            <div class ="lastSentence"
+                style="text-align: left;
+                position: absolute;
+                left: 35vw;
+                transform:translate( -50%, 0%);
+                font-size: 1.2vmax;
+                @media screen and (max-width:700px) {
+                    .lastSentence{
+                    text-align: left;
+                    position: absolute;
+                    left: 40vw;
+                    transform:translate( -50%, 60%);
+                    font-size: 1.2vmax;
+                }
+            }">
+                <p>
+                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
+                </p>
+                <p>
+                    INSTAGRAM : kmu_likelion
+                </p>
+                <p>
+                    EMAIL : qq212420@gmail.com
+                </p>
+                <br>
+                <p>
+                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
+                </p>
+                <p>
+                    ALL RIGHTS RESERVED
+                </p>
+            </div>
+        </div>    
+    </footer>  
 </body>
-
+    
 </html>

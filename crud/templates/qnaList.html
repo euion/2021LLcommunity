@@ -1,35 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    {% for qna in qnas.all %}
-    <div class="container">
-        <a href="{% url 'qnaDetail' qna.id %}"><h2>{{ qna.title }}</h2></a>
-    </div>
-    {% endfor %}
-    <div><a href="{% url 'qnaNew' %}">글쓰기</a></div>
-    <footer>
-        <div class = "lastPageWrap">
-            <div class ="lastPage">
-                <img src="{% static 'img/4.png' %}" alt="" loading="lazy">
-            </div>
-            <div class ="lastSentence">
-                <p>
-                    우)대구광역시 달서구 달구벌대로 1095 계명대학교 성서캠퍼스
-                </p>
-                <p>
-                    INSTAGRAM : kmu_likelion
-                </p>
-                <p>
-                    EMAIL : qq212420@gmail.com
-                </p>
-                <br>
-                <p>
-                    COPYRIGHT 2021 KEIMYUNG UNIVERSITY LIKELION
-                </p>
-                <p>
-                    ALL RIGHTS RESERVED
-                </p>
-            </div>
-        </div>    
-    </footer>  
+<head>
+    <link rel="stylesheet" href="{% static 'css/qnaList.css' %}">
+</head>
+<body>
+
+</body>
+    <table class="tableContainer">
+        <thead>
+            <td><h2>#</h2></td>
+            <td style="width: 70%;"><h2>title</h2></td>
+            <td><h2>작성자</h2></td>
+        </thead>
+        {% for qna in qnas.all %}
+        <tbody>
+            <td>{{ qna.id }}</td>
+            <td>
+                <div class="container">
+                    <a href="{% url 'qnaDetail' qna.id %}"><h4>{{ qna.title }}</h4></a>
+                </div>
+            </td>
+            <td>
+                <div class="container">
+                    <a href="{% url 'qnaDetail' qna.id %}"><h4>{{ qna.name }}</h4></a>
+                </div>
+            </td>
+        </tbody>
+        {% endfor %}
+        <tfoot>
+            <td colspan="3">
+                <div class="writePost">
+                    <a href="{% url 'qnaNew' %}">글쓰기</a>
+                </div>
+            </td>
+        </tfoot>
+    </table>
 {% endblock %}

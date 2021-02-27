@@ -48,10 +48,12 @@ span{padding: 3px;}
     justify-content: space-around;
 }
 .postCard{
-    padding: 2vw 10vw 2vw 10vw;
+    width: 25%;
+    padding: 2vmin;
     background-color: rgba(255, 255, 255, 0.479);
 }
-.postCard  a p3{
+.postCard  a h3{
+    text-align: center;
     padding: 2px;
 
 }
