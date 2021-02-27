@@ -2,36 +2,40 @@
 {% load static %}
 {% block content %}
     <head>
-        
+        <link rel="stylesheet" href="{% static 'css/infoList.css' %}">
     </head>
     <body>
-        <table class="tableContainer">
-            <thead>
-                <td>#</td><td>title</td><td>작성자</td>
-            </thead>
-            {% for info in infos.all %}
-            <tbody>
-                <td>{{ info.id }}</td>
-                <td>
-                    <div class="container">
-                        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.title }}</h2></a>
-                    </div>
-                </td>
-                <td>
-                    <div class="container">
-                        <a href="{% url 'infoDetail' info.id %}"><h2>{{ info.name }}</h2></a>
-                    </div>
-                </td>
-            </tbody>
-            {% endfor %}
-            <tfoot>
-                <tr>
-                    <td colspan="3">
-                        <div><a href="{% url 'infoNew' %}">글쓰기</a></div>
+        <div class="tableBody" style="background-color: white;" >
+            <table class="tableContainer" >
+                <thead>
+                    <td><h2>#</h2></td>
+                    <td style="width: 70%;"><h2>title</h2></td>
+                    <td><h2>작성자</h2></td>
+                </thead>
+                {% for crud in cruds.all %}
+                <tbody>
+                    <td style="text-align: center;">{{ crud.id }}</td>
+                    <td>
+                        <div class="container">
+                            <a href="{% url 'detail' crud.id %}"><h4 style="padding-left: 10px;">{{ crud.title }}</h4></a>
+                        </div>
                     </td>
-                </tr>
-            </tfoot>
-        </table>
+                    <td  style="text-align: center;">
+                        <div class="container">
+                            <a href="{% url 'detail' crud.id %}"><h4>{{ crud.name }}</h4></a>
+                        </div>
+                    </td>
+                </tbody>
+                {% endfor %}
+                <tfoot>
+                    <td colspan="3">
+                        <div class="writePost" >
+                            <a href="{% url 'new' %}">글쓰기</a>
+                        </div>
+                    </td>
+                </tfoot>
+            </table>
+        </div>
     </body>
     
 {% endblock %} 

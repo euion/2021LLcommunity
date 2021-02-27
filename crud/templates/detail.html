@@ -6,32 +6,38 @@
     </head>
     <body>
             <div class="container">
-                <table>
-                    <thead>
-                        <td colspan="2">
-                            <h2>{{ crud.title }}</h2>
-                        </td>
-                    </thead>
-                    <tbody>
-                        <td>
-                            <p>{{ crud.pub_date }}</p>
-                        </td>
-                        <td>
-                            <p>작성자 : {{ crud.name }}</p>
-                        </td>
-                    </tbody>
-                    <tfoot>
-                        <tr colspan="2">
-                            <td><p>{{ crud.body }}</p></td>
-                        </tr> 
-                    </tfoot>
-                </table>
-                <div>
-                    <ul>
-                        <li><a href="{% url 'free' %}">돌아가기</a></li>
+                <div class="postBody">
+                    <table>
+                        <thead>
+                            <td colspan="2">
+                                <h2>{{ crud.title }}</h2>
+                            </td>
+                        </thead>
+                        <tbody>
+                            <td>
+                                <p><b>작성 날짜 : </b>{{ crud.pub_date }}</p>
+                            </td>
+                            <td>
+                                <p><b>작성자 :</b> {{ crud.name }}</p>
+                            </td>
+                        </tbody>
+                        <tfoot>
+                            <tr colspan="2">
+                                <td><p>{{ crud.body }}</p></td>
+                            </tr> 
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="btnList">
+                    <ul >
+                        <li>
+                            <div class="freeBack">
+                                <p><a href="{% url 'free' %}">돌아가기</a></p>
+                            </div>
+                        </li>
                         <li>
                             <div class="freeDelete">
-                                <p><a href = "{% url 'delete' crud.id %}">삭제</a></p>
+                                <p><a href = "{% url 'delete' crud.id %}">삭제하기</a></p>
                             </div>
                         </li>
                         <li>
