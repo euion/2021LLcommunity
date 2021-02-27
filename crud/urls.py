@@ -30,4 +30,8 @@ crud_url = [
    path('crud/<int:crud_id>/edit', views.edit, name="edit"),
 ]
 
-urlpatterns = info_url + qna_url + crud_url
+comment_url = [
+   path('crudComment/', views.crudComment, name="crudComment"),
+]
+
+urlpatterns = info_url + qna_url + crud_url + comment_url

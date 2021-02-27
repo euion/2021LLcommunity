@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="{% static 'css/detail.css'%}">
     </head>
     <body>
-            <div class="containter">
+            <div class="container">
                 <table>
                     <thead>
                         <td colspan="2">
@@ -42,6 +42,24 @@
                     </ul>
                 </div>  
             </div>
+
+            <div class="container">
+                <form method="POST" action="{% url 'crudComment' %}">
+                    {% csrf_token %}
+                    <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
+                    <input type="hidden" name="name" value="{{ request.session.name }}">
+                    <input type="hidden" name="crud_id" value="{{ crud.id }}">
+                    <input type="submit" value="입력">
+                </form>
+            
+                {% for comment in comments %}
+                    <p>{{ comment.name }} - {{ comment.body }} - {{ comment.pub_date }}</p>
+                {% endfor %}
+
+
+
+            </div>
+
         <footer>
             <div class = "lastPageWrap">
                 <div class ="lastPage">

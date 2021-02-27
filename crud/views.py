@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
-from .models import Crud, Info, Qna
+from .models import *
 from .forms import CrudUpdate, InfoUpdate, QnaUpdate
 
 # Create your views here.
@@ -26,8 +26,17 @@ def free(request):
     
 def detail(request, crud_id):
     crud_detail = get_object_or_404(Crud, pk=crud_id)
+    try: # 댓글 불러오는 부분
+        comments = CrudComment.objects.filter(crud_id=crud_id)
+        try:
+            comments = comments.objects.all()
+        except AttributeError:
+            pass
+    except CrudComment.DoesNotExist:
+        comments = None
     content = {
         'crud' : crud_detail,
+        "comments" : comments,
     }
     return render(request, 'detail.html' , content)
 
@@ -64,6 +73,21 @@ def edit(request, crud_id):
         form = CrudUpdate(instance = crud)
  
         return render(request,'edit.html', {'form':form})
+
+def crudComment(request):
+    if request.method == "POST":
+        pub_date = timezone.now()
+        crud_id = request.POST["crud_id"]
+        crud = get_object_or_404(Crud, pk=crud_id)
+        name = request.POST["name"]
+        body = request.POST["body"]
+        crud_comment = CrudComment(name=name, pub_date=pub_date, body=body, crud_id=crud)
+        crud_comment.save()        
+        return redirect('/crud/' + str(crud_id))    
+    else:
+        redirect("index")
+
+
 
 # 정보게시판~~
 def infoList(request):
