@@ -48,6 +48,21 @@
             </ul>
         </div>  
     </div>
+
+    <div class="container">
+        <form method="POST" action="{% url 'qnaComment' %}">
+            {% csrf_token %}
+            <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
+            <input type="hidden" name="name" value="{{ request.session.name }}">
+            <input type="hidden" name="qna_id" value="{{ qna.id }}">
+            <input type="submit" value="입력">
+        </form>
+    
+        {% for comment in comments %}
+            <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+            <p>{{ comment.body }}</p><br>
+        {% endfor %}
+    </div>
 </body>
 
 {% endblock %}

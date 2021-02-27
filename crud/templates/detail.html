@@ -58,9 +58,9 @@
                 </form>
             
                 {% for comment in comments %}
-                    <p>{{ comment.name }} - {{ comment.body }} - {{ comment.pub_date }}</p>
+                    <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+                    <p>{{ comment.body }}</p><br>
                 {% endfor %}
-
             </div>           
     </body>
 {% endblock %}  

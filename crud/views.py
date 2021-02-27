@@ -26,14 +26,16 @@ def free(request):
     
 def detail(request, crud_id):
     crud_detail = get_object_or_404(Crud, pk=crud_id)
-    try: # 댓글 불러오는 부분
+    # ============ 댓글 불러오는 부분 ==============
+    try:
         comments = CrudComment.objects.filter(crud_id=crud_id)
         try:
             comments = comments.objects.all()
-        except AttributeError:
+        except AttributeError: # 댓글이 하나밖에 없을때 예외 처리
             pass
-    except CrudComment.DoesNotExist:
+    except CrudComment.DoesNotExist: # 댓글이 존재하지 않을때 예외 처리
         comments = None
+    # ==============================================
     content = {
         'crud' : crud_detail,
         "comments" : comments,
@@ -74,7 +76,7 @@ def edit(request, crud_id):
  
         return render(request,'edit.html', {'form':form})
 
-def crudComment(request):
+def crudComment(request): # 댓글 생성
     if request.method == "POST":
         pub_date = timezone.now()
         crud_id = request.POST["crud_id"]
@@ -84,8 +86,8 @@ def crudComment(request):
         crud_comment = CrudComment(name=name, pub_date=pub_date, body=body, crud_id=crud)
         crud_comment.save()        
         return redirect('/crud/' + str(crud_id))    
-    else:
-        redirect("index")
+    else: # POST 이외 방식으로 접근시 메인 화면으로 이동
+        return redirect("index")
 
 
 
@@ -139,7 +141,21 @@ def qnaList(request):
 
 def qnaDetail(request, qna_id):
     qna_detail = get_object_or_404(Qna, pk=qna_id)
-    return render(request, 'qnaDetail.html' , {'qna' : qna_detail})
+    # ========== 댓글 불러오는 부분 ==============
+    try:
+        comments = QnaComment.objects.filter(qna_id=qna_id)
+        try:
+            comments = comments.objects.all()
+        except AttributeError: # 댓글이 하나 밖에 없을때 예외 처리
+            pass
+    except QnaComment.DoesNotExist: # 댓글이 존재하지 않을때 예외 처리
+        comments = None
+    # ===========================================
+    content = {
+        'qna' : qna_detail,
+        'comments' : comments,
+    }
+    return render(request, 'qnaDetail.html' , content)
 
 def qnaCreate(request):
     qna = Qna()
@@ -174,3 +190,16 @@ def qnaEdit(request, qna_id):
     
 def qnaNew(request):
     return render(request, 'qnaNew.html')
+
+def qnaComment(request): # 댓글 생성
+    if request.method == "POST":
+        pub_date = timezone.now()
+        qna_id = request.POST["qna_id"]
+        qna = get_object_or_404(Qna, pk=qna_id)
+        name = request.POST["name"]
+        body = request.POST["body"]
+        qna_comment = QnaComment(name=name, pub_date=pub_date, body=body, qna_id=qna)
+        qna_comment.save()        
+        return redirect('/qna/' + str(qna_id))    
+    else: # POST 이외 방식으로 접근시 메인 화면으로 이동
+        return redirect("index")

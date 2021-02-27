@@ -32,6 +32,7 @@ crud_url = [
 
 comment_url = [
    path('crudComment/', views.crudComment, name="crudComment"),
+   path('qnaComment/', views.qnaComment, name="qnaComment"),
 ]
 
 urlpatterns = info_url + qna_url + crud_url + comment_url
