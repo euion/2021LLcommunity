@@ -1,27 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!--font list-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>멋쟁이 사자처럼 :: 계명대</title>
     <style>
     </style>
+    {% block head %}
+    {% endblock %}
 </head>
+
 <body>
     <div class="allNav">
         <header>
             <div class="topHeader">
-                <a href="{% url 'index' %}"><img src="{% static 'img/LLlogo.png' %}" style="width: 300px;" id="logo"></a>
+                <a href="{% url 'index' %}"><img src="{% static 'img/LLlogo.png' %}" style="width: 300px;"
+                        id="logo"></a>
                 <div></div>
                 <ul>
-                    <li id="login"><a href="#" >로그인</a></li>
-                    <li id="signup"><a href="#">회원가입</a></li>
+                    {% if request.session.name %}
+                    <li id="login"><a href="{% url 'login:logout' %}">로그아웃</a></li>
+                    {% else %}
+                    <li id="login"><a href="{% url 'login:login' %}">로그인</a></li>
+                    <li id="signup"><a href="{% url 'login:signup' %}">회원가입</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </header>
@@ -37,8 +46,9 @@
         </nav>
     </div>
     <main>
-            {% block content %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
 </body>
+
 </html>
