@@ -12,17 +12,17 @@
                     <td style="width: 70%;"><h2>title</h2></td>
                     <td><h2>작성자</h2></td>
                 </thead>
-                {% for crud in cruds.all %}
+                {% for info in infos.all %}
                 <tbody>
-                    <td style="text-align: center;">{{ crud.id }}</td>
+                    <td style="text-align: center;">{{ info.id }}</td>
                     <td>
                         <div class="container">
-                            <a href="{% url 'detail' crud.id %}"><h4 style="padding-left: 10px;">{{ crud.title }}</h4></a>
+                            <a href="{% url 'infoDetail' info.id %}"><h4 style="padding-left: 10px;">{{ info.title }}</h4></a>
                         </div>
                     </td>
                     <td  style="text-align: center;">
                         <div class="container">
-                            <a href="{% url 'detail' crud.id %}"><h4>{{ crud.name }}</h4></a>
+                            <a href="{% url 'infoDetail' info.id %}"><h4>{{ info.name }}</h4></a>
                         </div>
                     </td>
                 </tbody>
@@ -30,7 +30,7 @@
                 <tfoot>
                     <td colspan="3">
                         <div class="writePost" >
-                            <a href="{% url 'new' %}">글쓰기</a>
+                            <a href="{% url 'infoNew' %}">글쓰기</a>
                         </div>
                     </td>
                 </tfoot>
