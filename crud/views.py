@@ -98,7 +98,21 @@ def infoList(request):
 
 def infoDetail(request, info_id):
     info_detail = get_object_or_404(Info, pk=info_id)
-    return render(request, 'infoDetail.html' , {'info' : info_detail})
+    # ============ 댓글 불러오는 부분 ==============
+    try:
+        comments = InfoComment.objects.filter(info_id=info_id)
+        try:
+            comments = comments.objects.all()
+        except AttributeError: # 댓글이 하나밖에 없을때 예외 처리
+            pass
+    except InfoComment.DoesNotExist: # 댓글이 존재하지 않을때 예외 처리
+        comments = None
+    # ==============================================
+    content = {
+        'info' : info_detail,
+        'comments' : comments,
+    }
+    return render(request, 'infoDetail.html' , content)
 
 def infoNew(request):
     return render(request, 'infoNew.html')
@@ -133,6 +147,20 @@ def infoEdit(request, info_id):
         form = InfoUpdate(instance = info)
  
         return render(request,'infoEdit.html', {'form':form})
+
+def infoComment(request): # 댓글 생성
+    if request.method == "POST":
+        pub_date = timezone.now()
+        info_id = request.POST["info_id"]
+        info = get_object_or_404(Info, pk=info_id)
+        name = request.POST["name"]
+        body = request.POST["body"]
+        info_comment = InfoComment(name=name, pub_date=pub_date, body=body, info_id=info)
+        info_comment.save()        
+        return redirect('/info/' + str(info.id))    
+    else: # POST 이외 방식으로 접근시 메인 화면으로 이동
+        return redirect("index")
+
 
 # 질문 게시판~~
 def qnaList(request):

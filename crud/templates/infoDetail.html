@@ -15,4 +15,19 @@
             <p><a href = "{% url 'infoEdit' info.id %}">수정하기</a></p>
         </div>
     </div>
+
+    <div class="container">
+        <form method="POST" action="{% url 'infoComment' %}">
+            {% csrf_token %}
+            <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
+            <input type="hidden" name="name" value="{{ request.session.name }}">
+            <input type="hidden" name="info_id" value="{{ info.id }}">
+            <input type="submit" value="입력">
+        </form>
+    
+        {% for comment in comments %}
+            <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+            <p>{{ comment.body }}</p><br>
+        {% endfor %}
+    </div>
 {% endblock %}
