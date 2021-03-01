@@ -35,9 +35,10 @@
                                 <p><a href="{% url 'free' %}">돌아가기</a></p>
                             </div>
                         </li>
+                        {% if request.session.name == crud.name %}
                         <li>
                             <div class="freeDelete">
-                                <p><a href = "{% url 'delete' crud.id %}">삭제하기</a></p>
+                                <p><a href = "{% url 'delete' crud.id %}">삭제</a></p>
                             </div>
                         </li>
                         <li>
@@ -45,10 +46,12 @@
                                 <p><a href = "{% url 'edit' crud.id %}">수정하기</a></p>
                             </div>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>  
             </div>
             <div class="container">
+                {% if request.session.name %}
                 <form method="POST" action="{% url 'crudComment' %}">
                     {% csrf_token %}
                     <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
@@ -56,6 +59,7 @@
                     <input type="hidden" name="crud_id" value="{{ crud.id }}">
                     <input type="submit" value="입력">
                 </form>
+                {% endif %}
             
                 {% for comment in comments %}
                     <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>

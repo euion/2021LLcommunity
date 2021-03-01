@@ -8,15 +8,18 @@
         <p>{{ info.body }}</p>
         <p>{{ info.name }}</p>
         <a href="{% url 'infoList' %}">돌아가기</a>
+        {% if request.session.name == info.name %}
         <div class="freeDelete">
             <p><a href = "{% url 'infoDelete' info.id %}">삭제</a></p>
         </div>
         <div class="freeEdit">
             <p><a href = "{% url 'infoEdit' info.id %}">수정하기</a></p>
         </div>
+        {% endif %}
     </div>
 
     <div class="container">
+        {% if request.session.name %}
         <form method="POST" action="{% url 'infoComment' %}">
             {% csrf_token %}
             <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
@@ -24,6 +27,7 @@
             <input type="hidden" name="info_id" value="{{ info.id }}">
             <input type="submit" value="입력">
         </form>
+        {% endif %}
     
         {% for comment in comments %}
             <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>

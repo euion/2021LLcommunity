@@ -53,8 +53,9 @@ def signup(request):
 
         print(student_ID)
         res_data = {}
-        if not (name and student_ID and password and student_ID):
+        if not (name and student_ID and password):
             res_data['error'] = '모든 값을 입력하세요'
+            print(res_data['error'])
 
             return render(request, 'signup.html', res_data)
 
