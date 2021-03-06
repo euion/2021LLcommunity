@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <br>
-    <div class="container">
-        <form action="{% url 'create' %}">
-        <h4>제목: </h4>
-        <input type="text" name="title">
-        <h4>작성자: </h4>
-        <input type="text" name="name">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/new.css' %}">
+    </head>
+    <body>
         <br>
-        <br>
-        <h4>본문: </h4>
-        <textarea cols=40 rows=10 name="body"></textarea>
-        <br>
-        <br>
-        <input class="btn btn-dark" type="submit" value="제출하기">
-    </form>
-    </div>  
+        <div class="container">
+            <form action="{% url 'create' %}">
+                <ul class="inputWriterData">
+                    <li><input type="text" name="title" class="textTitle" placeholder="제목"></li>
+                    <li><input type="text" name="name" class="textName" placeholder="작성자"></li>
+                </ul>
+                <ul>
+                    <li> <textarea cols=40 rows=10 name="body" class="textMain" placeholder="본문"></textarea></li>
+                </ul>    
+                <input class="writePost" type="submit" value="제출하기">
+            </form>
+        </div>    
+    </body>
 {% endblock %}

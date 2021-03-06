@@ -27,6 +27,7 @@
                 </td>
             </tbody>
             {% endfor %}
+            {% if request.session.name %}
             <tfoot>
                 <td colspan="3">
                     <div class="writePost" >
@@ -34,6 +35,7 @@
                     </div>
                 </td>
             </tfoot>
+            {% endif %}
         </table>
     </div>
     <div>
