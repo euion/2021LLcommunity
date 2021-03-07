@@ -1,10 +1,11 @@
 from django.db import models
+from account.models import Profile
 
 # Create your models here.
 
 class Crud(models.Model):
     title = models.CharField(max_length=200)
-    name = models.CharField(max_length=50, null=True)
+    profile_id = models.ForeignKey(Profile, related_name="Crud_profile", on_delete=models.CASCADE, db_column="Crud_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
     #image = models.ImageField(upload_to="media/freeImages/")
@@ -15,7 +16,7 @@ class Crud(models.Model):
 # Crud의 댓글 모델
 class CrudComment(models.Model):
     crud_id = models.ForeignKey(Crud, related_name="crud", on_delete=models.CASCADE, db_column="crud_id")
-    name = models.CharField(max_length=50)
+    profile_id = models.ForeignKey(Profile, related_name="CrudComment_profile", on_delete=models.CASCADE, db_column="CrudComment_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField(null=False, blank=False)
 

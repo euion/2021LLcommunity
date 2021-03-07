@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 
 from .models import *
 from .forms import CrudUpdate, InfoUpdate, QnaUpdate
+from account.models import Profile
 
 # Create your views here.
 # index.html
@@ -54,8 +55,12 @@ def create(request):
         crud = Crud()
         crud.title = request.GET['title']
         crud.body = request.GET['body']
-        crud.name = request.GET['name']
         crud.pub_date = timezone.datetime.now()
+
+        profile_id = request.GET['profile_id']
+        profile = get_object_or_404(Profile, pk=profile_id)
+        crud.profile_id = profile
+
         crud.save()
         return redirect('/crud/' + str(crud.id))
 
@@ -88,9 +93,10 @@ def crudComment(request): # 댓글 생성
         pub_date = timezone.now()
         crud_id = request.POST["crud_id"]
         crud = get_object_or_404(Crud, pk=crud_id)
-        name = request.POST["name"]
+        profile_id = request.POST["profile_id"]
+        profile = get_object_or_404(Profile, pk=profile_id)
         body = request.POST["body"]
-        crud_comment = CrudComment(name=name, pub_date=pub_date, body=body, crud_id=crud)
+        crud_comment = CrudComment(profile_id=profile, pub_date=pub_date, body=body, crud_id=crud)
         crud_comment.save()        
         return redirect('/crud/' + str(crud_id))    
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동

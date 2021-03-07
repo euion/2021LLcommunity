@@ -4,10 +4,10 @@ from .models import Crud, Info,  Qna
 class CrudUpdate(forms.ModelForm):
     class Meta:
         model = Crud
-        fields = ['title', 'name', 'body']
+        fields = ['title', 'profile_id', 'body']
         lables = {
         'title':'제목' ,
-        'name': '작성자', 
+        'profile_id': '작성자', 
         'body' : '본문'
         }
 

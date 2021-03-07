@@ -21,6 +21,8 @@ def login(request):
                 if check_password(password, member_profile[0].user_PW):
                     # session!
                     request.session['name'] = member_profile[0].name
+                    request.session['profile_id'] = member_profile[0].id
+                    request.session['user_id'] = member_profile[0].user_id
                     
                     # redirect!
                     return redirect('/')
