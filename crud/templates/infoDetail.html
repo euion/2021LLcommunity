@@ -19,7 +19,7 @@
                         <p><b>작성 날짜 : </b>{{ info.pub_date }}</p>
                     </td>
                     <td>
-                        <p><b>작성자 :</b> {{ info.name }}</p>
+                        <p><b>작성자 :</b> {{ info.profile_id.name }}</p>
                     </td>
                 </tbody>
                 <tfoot >
@@ -36,7 +36,7 @@
                         <p><a href="{% url 'infoList' %}">돌아가기</a></p>
                     </div>
                 </li>
-                {% if request.session.name == info.name %}
+                {% if request.session.user_id == info.profile_id.user_id %}
                 <li>
                     <div class="freeDelete">
                         <p><a href = "{% url 'infoDelete' info.id %}">삭제</a></p>
@@ -56,14 +56,14 @@
         <form method="POST" action="{% url 'infoComment' %}">
             {% csrf_token %}
             <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
-            <input type="hidden" name="name" value="{{ request.session.name }}">
+            <input type="hidden" name="profile_id" value="{{ request.session.profile_id }}">
             <input type="hidden" name="info_id" value="{{ info.id }}">
             <input type="submit" value="입력">
         </form>
         {% endif %}
     
         {% for comment in comments %}
-            <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+            <p><b>{{ comment.profile_id.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
             <p>{{ comment.body }}</p><br>
         {% endfor %}
     </div>

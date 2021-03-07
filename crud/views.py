@@ -137,7 +137,11 @@ def infoCreate(request):
     info = Info()
     info.title = request.GET['title']
     info.body = request.GET['body']
-    info.name = request.GET['name']
+    
+    profile_id = request.GET['profile_id']
+    profile = get_object_or_404(Profile, pk=profile_id)
+    info.profile_id = profile
+
     info.pub_date = timezone.datetime.now()
     info.save()
     return redirect('/info/' + str(info.id))
@@ -169,9 +173,10 @@ def infoComment(request): # 댓글 생성
         pub_date = timezone.now()
         info_id = request.POST["info_id"]
         info = get_object_or_404(Info, pk=info_id)
-        name = request.POST["name"]
+        profile_id = request.POST["profile_id"]
+        profile = get_object_or_404(Profile, pk=profile_id)
         body = request.POST["body"]
-        info_comment = InfoComment(name=name, pub_date=pub_date, body=body, info_id=info)
+        info_comment = InfoComment(profile_id=profile, pub_date=pub_date, body=body, info_id=info)
         info_comment.save()        
         return redirect('/info/' + str(info.id))    
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동
@@ -209,7 +214,11 @@ def qnaCreate(request):
         qna = Qna()
         qna.title = request.GET['title']
         qna.body = request.GET['body']
-        qna.name = request.GET['name']
+
+        profile_id = request.GET['profile_id']
+        profile = get_object_or_404(Profile, pk=profile_id)
+        qna.profile_id = profile
+
         qna.pub_date = timezone.datetime.now()
         qna.save()
         return redirect('/qna/' + str(qna.id))
@@ -246,9 +255,10 @@ def qnaComment(request): # 댓글 생성
         pub_date = timezone.now()
         qna_id = request.POST["qna_id"]
         qna = get_object_or_404(Qna, pk=qna_id)
-        name = request.POST["name"]
+        profile_id = request.POST["profile_id"]
+        profile = get_object_or_404(Profile, pk=profile_id)
         body = request.POST["body"]
-        qna_comment = QnaComment(name=name, pub_date=pub_date, body=body, qna_id=qna)
+        qna_comment = QnaComment(profile_id=profile, pub_date=pub_date, body=body, qna_id=qna)
         qna_comment.save()        
         return redirect('/qna/' + str(qna_id))    
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동

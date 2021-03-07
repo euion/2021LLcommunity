@@ -10,11 +10,12 @@
             <form action="{% url 'create' %}">
                 <ul class="inputWriterData">
                     <li><input type="text" name="title" class="textTitle" placeholder="제목"></li>
-                    <li><input type="text" name="name" class="textName" placeholder="작성자"></li>
+                    <!-- <li><input type="text" name="name" class="textName" placeholder="작성자"></li> -->
                 </ul>
                 <ul>
                     <li> <textarea cols=40 rows=10 name="body" class="textMain" placeholder="본문"></textarea></li>
                 </ul>    
+                <input type="hidden" name="profile_id" value="{{ request.session.profile_id }}"> 
                 <input class="writePost" type="submit" value="제출하기">
             </form>
         </div>    

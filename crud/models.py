@@ -21,12 +21,12 @@ class CrudComment(models.Model):
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.name + " - " + str(self.pub_date)
+        return self.body
 
 
 class Info(models.Model):
     title = models.CharField(max_length=200)
-    name = models.CharField(max_length=50 , null=True )
+    profile_id = models.ForeignKey(Profile, related_name="Info_profile", on_delete=models.CASCADE, db_column="Info_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
 
@@ -36,17 +36,17 @@ class Info(models.Model):
 # Info의 댓글 모델
 class InfoComment(models.Model):
     info_id = models.ForeignKey(Info, related_name="info", on_delete=models.CASCADE, db_column="info_id")
-    name = models.CharField(max_length=50)
+    profile_id = models.ForeignKey(Profile, related_name="InfoComment_profile", on_delete=models.CASCADE, db_column="InfoComment_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.name + " - " + str(self.pub_date)
+        return self.body
 
 
 class Qna(models.Model):
     title = models.CharField(max_length=200)
-    name = models.CharField(max_length=50 , null=True)
+    profile_id = models.ForeignKey(Profile, related_name="Qna_profile", on_delete=models.CASCADE, db_column="Qna_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
     
@@ -56,9 +56,9 @@ class Qna(models.Model):
 # Qna의 댓글 모델
 class QnaComment(models.Model):
     qna_id = models.ForeignKey(Qna, related_name="qna", on_delete=models.CASCADE, db_column="qna_id")
-    name = models.CharField(max_length=50)
+    profile_id = models.ForeignKey(Profile, related_name="QnaComment_profile", on_delete=models.CASCADE, db_column="QnaComment_profile_id")
     pub_date = models.DateTimeField('date published')
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.name + " - " + str(self.pub_date)
+        return self.body

@@ -18,7 +18,7 @@
                         <p><b>작성 날짜 : </b>{{ qna.pub_date }}</p>
                     </td>
                     <td>
-                        <p><b>작성자 :</b> {{ qna.name }}</p>
+                        <p><b>작성자 :</b> {{ qna.profile_id.name }}</p>
                     </td>
                 </tbody>
                 <tfoot>
@@ -35,7 +35,7 @@
                         <p><a href="{% url 'qnaList' %}">돌아가기</a></p>
                     </div>
                 </li>
-                {% if request.session.name == qna.name %}
+                {% if request.session.user_id == qna.profile_id.user_id %}
                 <li>
                     <div class="freeDelete">
                         <p><a href = "{% url 'qnaDelete' qna.id %}">삭제하기</a></p>
@@ -56,14 +56,14 @@
         <form method="POST" action="{% url 'qnaComment' %}">
             {% csrf_token %}
             <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
-            <input type="hidden" name="name" value="{{ request.session.name }}">
+            <input type="hidden" name="profile_id" value="{{ request.session.profile_id }}">
             <input type="hidden" name="qna_id" value="{{ qna.id }}">
             <input type="submit" value="입력">
         </form>
         {% endif %}
     
         {% for comment in comments %}
-            <p><b>{{ comment.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+            <p><b>{{ comment.profile_id.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
             <p>{{ comment.body }}</p><br>
         {% endfor %}
     </div>
