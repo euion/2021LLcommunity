@@ -21,7 +21,7 @@ class CrudComment(models.Model):
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.body
+        return self.profile_id.name + " - " + self.body
 
 
 class Info(models.Model):
@@ -41,7 +41,7 @@ class InfoComment(models.Model):
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.body
+        return self.profile_id.name + " - " + self.body
 
 
 class Qna(models.Model):
@@ -61,4 +61,4 @@ class QnaComment(models.Model):
     body = models.TextField(null=False, blank=False)
 
     def __str__(self):
-        return self.body
+        return self.profile_id.name + " - " + self.body

@@ -88,18 +88,30 @@ def edit(request, crud_id):
     
             return render(request,'edit.html', {'form':form})
 
-def crudComment(request): # 댓글 생성
+def crudComment(request): # 댓글 관련 함수
     if request.method == "POST":
-        pub_date = timezone.now()
-        crud_id = request.POST["crud_id"]
-        crud = get_object_or_404(Crud, pk=crud_id)
-        profile_id = request.POST["profile_id"]
-        profile = get_object_or_404(Profile, pk=profile_id)
-        body = request.POST["body"]
-        crud_comment = CrudComment(profile_id=profile, pub_date=pub_date, body=body, crud_id=crud)
-        crud_comment.save()        
-        return redirect('/crud/' + str(crud_id))    
+        if request.POST["method"] == "POST": # 댓글 생성
+            pub_date = timezone.now()
+            crud_id = request.POST["crud_id"]
+            crud = get_object_or_404(Crud, pk=crud_id)
+            profile_id = request.POST["profile_id"]
+            profile = get_object_or_404(Profile, pk=profile_id)
+            body = request.POST["body"]
+            crud_comment = CrudComment(profile_id=profile, pub_date=pub_date, body=body, crud_id=crud)
+            crud_comment.save()        
+            return redirect('/crud/' + str(crud_id))
+        
+        # elif request.POST["method"] == "PUT":
+
+        elif request.POST["method"] == "DELETE": # 댓글 삭제
+            comment_id = request.POST["comment_id"]
+            crud_id = request.POST["crud_id"]
+            comment = get_object_or_404(CrudComment, pk=comment_id)
+            comment.delete()
+            return redirect('/crud/' + str(crud_id))        
+
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동
+        print("http 메소드:", request.method)
         return redirect("index")
 
 
@@ -168,17 +180,28 @@ def infoEdit(request, info_id):
  
         return render(request,'infoEdit.html', {'form':form})
 
-def infoComment(request): # 댓글 생성
+def infoComment(request): 
     if request.method == "POST":
-        pub_date = timezone.now()
-        info_id = request.POST["info_id"]
-        info = get_object_or_404(Info, pk=info_id)
-        profile_id = request.POST["profile_id"]
-        profile = get_object_or_404(Profile, pk=profile_id)
-        body = request.POST["body"]
-        info_comment = InfoComment(profile_id=profile, pub_date=pub_date, body=body, info_id=info)
-        info_comment.save()        
-        return redirect('/info/' + str(info.id))    
+        if request.POST["method"] == "POST": # 댓글 생성
+            pub_date = timezone.now()
+            info_id = request.POST["info_id"]
+            info = get_object_or_404(Info, pk=info_id)
+            profile_id = request.POST["profile_id"]
+            profile = get_object_or_404(Profile, pk=profile_id)
+            body = request.POST["body"]
+            info_comment = InfoComment(profile_id=profile, pub_date=pub_date, body=body, info_id=info)
+            info_comment.save()        
+            return redirect('/info/' + str(info.id))
+
+        # elif request.POST["method"] == "PUT":
+
+        elif request.POST["method"] == "DELETE": # 댓글 삭제
+            comment_id = request.POST["comment_id"]
+            info_id = request.POST["info_id"]
+            comment = get_object_or_404(InfoComment, pk=comment_id)
+            comment.delete()
+            return redirect('/info/' + str(info_id))   
+
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동
         return redirect("index")
 
@@ -252,14 +275,26 @@ def qnaNew(request):
 
 def qnaComment(request): # 댓글 생성
     if request.method == "POST":
-        pub_date = timezone.now()
-        qna_id = request.POST["qna_id"]
-        qna = get_object_or_404(Qna, pk=qna_id)
-        profile_id = request.POST["profile_id"]
-        profile = get_object_or_404(Profile, pk=profile_id)
-        body = request.POST["body"]
-        qna_comment = QnaComment(profile_id=profile, pub_date=pub_date, body=body, qna_id=qna)
-        qna_comment.save()        
-        return redirect('/qna/' + str(qna_id))    
+        if request.POST["method"] == "POST": # 댓글 생성
+            pub_date = timezone.now()
+            qna_id = request.POST["qna_id"]
+            qna = get_object_or_404(Qna, pk=qna_id)
+            profile_id = request.POST["profile_id"]
+            profile = get_object_or_404(Profile, pk=profile_id)
+            body = request.POST["body"]
+            qna_comment = QnaComment(profile_id=profile, pub_date=pub_date, body=body, qna_id=qna)
+            qna_comment.save()        
+            return redirect('/qna/' + str(qna_id))  
+
+        # elif request.POST["method"] == "PUT":
+
+        elif request.POST["method"] == "DELETE": # 댓글 삭제
+            comment_id = request.POST["comment_id"]
+            qna_id = request.POST["qna_id"]
+            comment = get_object_or_404(QnaComment, pk=comment_id)
+            comment.delete()
+            return redirect('/qna/' + str(qna_id))  
+        
+
     else: # POST 이외 방식으로 접근시 메인 화면으로 이동
         return redirect("index")

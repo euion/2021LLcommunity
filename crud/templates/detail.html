@@ -57,12 +57,31 @@
                     <textarea name="body" placeholder="댓글을 입력하세요." rows="3" cols="80"></textarea>
                     <input type="hidden" name="profile_id" value="{{ request.session.profile_id }}">
                     <input type="hidden" name="crud_id" value="{{ crud.id }}">
+                    <input type="hidden" name="method" value="POST">
                     <input type="submit" value="입력">
                 </form>
                 {% endif %}
             
                 {% for comment in comments %}
-                    <p><b>{{ comment.profile_id.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+                    <p style="display:inline;"><b>{{ comment.profile_id.name }}</b> - <tt>{{ comment.pub_date }}</tt></p>
+                    <!----------- 작성자의 댓글은 수정, 삭제 버튼이 보이도록 구현 ---------->
+                    {% if request.session.user_id == comment.profile_id.user_id %}
+                        <form method="POST" action="#" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <input type="hidden" name="method" value="PUT">
+                            <input type="submit" value="수정">
+                        </form>
+
+                        <form method="POST" action="{% url 'crudComment' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <input type="hidden" name="crud_id" value="{{ crud.id }}">
+                            <input type="hidden" name="method" value="DELETE">
+                            <input type="submit" value="삭제">
+                        </form>
+                    {% endif %}
+                    <!--------------------------------------------------------------------->                 
                     <p>{{ comment.body }}</p><br>
                 {% endfor %}
             </div>           
