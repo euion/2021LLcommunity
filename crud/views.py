@@ -101,7 +101,21 @@ def crudComment(request): # 댓글 관련 함수
             crud_comment.save()        
             return redirect('/crud/' + str(crud_id))
         
-        # elif request.POST["method"] == "PUT":
+        elif request.POST["method"] == "_PUT": # 댓글 수정 페이지로 이동
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(CrudComment, pk=comment_id)
+            if comment.profile_id.user_id == request.session["user_id"]:
+                return render(request, "crudCommentModify.html" ,{"comment" : comment})
+            else:
+                return redirect("index")
+        
+        elif request.POST["method"] == "PUT": # 댓글 수정
+            body = request.POST["body"]
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(CrudComment, pk=comment_id)
+            comment.body = body
+            comment.save()
+            return redirect('/crud/' + str(comment.crud_id.id))
 
         elif request.POST["method"] == "DELETE": # 댓글 삭제
             comment_id = request.POST["comment_id"]
@@ -193,7 +207,21 @@ def infoComment(request):
             info_comment.save()        
             return redirect('/info/' + str(info.id))
 
-        # elif request.POST["method"] == "PUT":
+        elif request.POST["method"] == "_PUT": # 댓글 수정 페이지로 이동
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(InfoComment, pk=comment_id)
+            if comment.profile_id.user_id == request.session["user_id"]:
+                return render(request, "infoCommentModify.html" ,{"comment" : comment})
+            else:
+                return redirect("index")
+        
+        elif request.POST["method"] == "PUT": # 댓글 수정
+            body = request.POST["body"]
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(InfoComment, pk=comment_id)
+            comment.body = body
+            comment.save()
+            return redirect('/info/' + str(comment.info_id.id))
 
         elif request.POST["method"] == "DELETE": # 댓글 삭제
             comment_id = request.POST["comment_id"]
@@ -286,7 +314,21 @@ def qnaComment(request): # 댓글 생성
             qna_comment.save()        
             return redirect('/qna/' + str(qna_id))  
 
-        # elif request.POST["method"] == "PUT":
+        elif request.POST["method"] == "_PUT": # 댓글 수정 페이지로 이동
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(QnaComment, pk=comment_id)
+            if comment.profile_id.user_id == request.session["user_id"]:
+                return render(request, "qnaCommentModify.html" ,{"comment" : comment})
+            else:
+                return redirect("index")
+        
+        elif request.POST["method"] == "PUT": # 댓글 수정
+            body = request.POST["body"]
+            comment_id = request.POST["comment_id"]
+            comment = get_object_or_404(QnaComment, pk=comment_id)
+            comment.body = body
+            comment.save()
+            return redirect('/qna/' + str(comment.qna_id.id))
 
         elif request.POST["method"] == "DELETE": # 댓글 삭제
             comment_id = request.POST["comment_id"]
