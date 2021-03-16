@@ -24,7 +24,7 @@ def index(request):
 # 자유게시판~~
 def free(request):
     cruds = Crud.objects.all().order_by('-pub_date')
-    paginator = Paginator(cruds, 5) # 페이지네이션 구현
+    paginator = Paginator(cruds, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
     return render(request, 'free.html', {'cruds' : posts})
@@ -133,7 +133,7 @@ def crudComment(request): # 댓글 관련 함수
 # 정보게시판~~
 def infoList(request):
     infos = Info.objects.all().order_by('-pub_date')
-    paginator = Paginator(infos, 5) # 페이지네이션 구현
+    paginator = Paginator(infos, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
     return render(request, 'infoList.html', {'infos':posts})
@@ -237,7 +237,7 @@ def infoComment(request):
 # 질문 게시판~~
 def qnaList(request):
     qnas = Qna.objects.all().order_by('-pub_date')
-    paginator = Paginator(qnas, 5) # 페이지네이션 구현
+    paginator = Paginator(qnas, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
     return render(request,'qnaList.html', {'qnas': posts})

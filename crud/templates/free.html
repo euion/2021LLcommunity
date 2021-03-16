@@ -38,15 +38,15 @@
             {% endif %}
         </table>
     </div>
-    <div>
+    <div class="pagenation">
         {% if cruds.has_previous %}
         <a href="?page=1">처음으로</a>
         <a href="?page={{ cruds.previous_page_number }}">&lt;&lt;</a>
         {% endif %}
 
-        <span>{{ cruds.number }}</span>
-        <span>  of  </span>
-        <span>{{ cruds.paginator.num_pages }}</span>
+        <span>
+            {{ cruds.number }}  of  {{ cruds.paginator.num_pages }}
+        </span>
 
         {% if cruds.has_next %}
         <a href="?page={{ cruds.next_page_number }}">&gt;&gt;</a>
