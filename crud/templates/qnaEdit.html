@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+</head>
+
+<body>
     <div class="container">
-        {% csrf_token %}
-        <form action="{% url 'qnaCreate' %}">
-        <table>
-            {{form.as_table}}
-        </table>
-        <input class="btn btn-dark" type="submit" value="수정하기">
-    </form>
+        <form action="{% url 'qnaEdit' qna.id %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input class="writePost" type="submit" value="수정하기">
+        </form>
     </div>
+</body>
 {% endblock %}

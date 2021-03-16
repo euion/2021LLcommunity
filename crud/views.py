@@ -23,7 +23,7 @@ def index(request):
 
 # 자유게시판~~
 def free(request):
-    cruds = Crud.objects.all().order_by('-pub_date')
+    cruds = Crud.objects.all().order_by('-id')
     paginator = Paginator(cruds, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
@@ -79,14 +79,14 @@ def edit(request, crud_id):
             if form.is_valid():
                 crud.title = form.cleaned_data['title']
                 crud.body = form.cleaned_data['body']
-                crud.name = request.GET['name']
+                crud.name = request.session['name']
                 crud.pub_date=timezone.now()
                 crud.save()
-                return redirect('/detail/' + str(crud.id))
+                return redirect('/crud/' + str(crud.id))
         else:
             form = CrudUpdate(instance = crud)
     
-            return render(request,'edit.html', {'form':form})
+            return render(request,'edit.html', {'form':form, 'crud': crud})
 
 def crudComment(request): # 댓글 관련 함수
     if request.method == "POST":
@@ -132,7 +132,7 @@ def crudComment(request): # 댓글 관련 함수
 
 # 정보게시판~~
 def infoList(request):
-    infos = Info.objects.all().order_by('-pub_date')
+    infos = Info.objects.all().order_by('-id')
     paginator = Paginator(infos, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
@@ -160,39 +160,42 @@ def infoNew(request):
     return render(request, 'infoNew.html')
 
 def infoCreate(request):
-    info = Info()
-    info.title = request.GET['title']
-    info.body = request.GET['body']
-    
-    profile_id = request.GET['profile_id']
-    profile = get_object_or_404(Profile, pk=profile_id)
-    info.profile_id = profile
+    if 'name' in request.session:
+        info = Info()
+        info.title = request.GET['title']
+        info.body = request.GET['body']
+        info.pub_date = timezone.datetime.now()
+        
+        profile_id = request.GET['profile_id']
+        profile = get_object_or_404(Profile, pk=profile_id)
+        info.profile_id = profile
 
-    info.pub_date = timezone.datetime.now()
-    info.save()
-    return redirect('/info/' + str(info.id))
+        info.save()
+        return redirect('/info/' + str(info.id))
 
 def infoDelete(request, info_id):
-    info = Info.objects.get(id=info_id)
-    info.delete()
-    return redirect('/infoList/')
+    if 'name' in request.session:
+        info = Info.objects.get(id=info_id)
+        info.delete()
+        return redirect('/infoList/')
 
 def infoEdit(request, info_id):
-    info = Info.objects.get(id=info_id)
+    if 'name' in request.session:
+        info = Info.objects.get(id=info_id)
 
-    if request.method =='POST':
-        form = InfoUpdate(request.POST)
-        if form.is_valid():
-            info.title = form.cleaned_data['title']
-            info.body = form.cleaned_data['body']
-            info.name = request.GET['name']
-            info.pub_date=timezone.now()
-            info.save()
-            return redirect('/infoDetail/' + str(info.id))
-    else:
-        form = InfoUpdate(instance = info)
- 
-        return render(request,'infoEdit.html', {'form':form})
+        if request.method =='POST':
+            form = InfoUpdate(request.POST)
+            if form.is_valid():
+                info.title = form.cleaned_data['title']
+                info.body = form.cleaned_data['body']
+                info.name = request.session['name']
+                info.pub_date=timezone.now()
+                info.save()
+                return redirect('/info/' + str(info.id))
+        else:
+            form = InfoUpdate(instance = info)
+    
+            return render(request,'infoEdit.html', {'form':form, 'info': info})
 
 def infoComment(request): 
     if request.method == "POST":
@@ -236,7 +239,7 @@ def infoComment(request):
 
 # 질문 게시판~~
 def qnaList(request):
-    qnas = Qna.objects.all().order_by('-pub_date')
+    qnas = Qna.objects.all().order_by('-id')
     paginator = Paginator(qnas, 10) # 페이지네이션 구현
     page = request.GET.get("page")
     posts = paginator.get_page(page)
@@ -265,12 +268,13 @@ def qnaCreate(request):
         qna = Qna()
         qna.title = request.GET['title']
         qna.body = request.GET['body']
+        qna.pub_date = timezone.datetime.now()
 
         profile_id = request.GET['profile_id']
         profile = get_object_or_404(Profile, pk=profile_id)
         qna.profile_id = profile
 
-        qna.pub_date = timezone.datetime.now()
+        
         qna.save()
         return redirect('/qna/' + str(qna.id))
 
@@ -289,14 +293,14 @@ def qnaEdit(request, qna_id):
             if form.is_valid():
                 qna.title = form.cleaned_data['title']
                 qna.body = form.cleaned_data['body']
-                qna.name = request.GET['name']
+                qna.name = request.session['name']
                 qna.pub_date=timezone.now()
                 qna.save()
-                return redirect('/qnaDetail/' + str(qna.id))
+                return redirect('/qna/' + str(qna.id))
         else:
             form = QnaUpdate(instance = qna)
     
-            return render(request,'qnaEdit.html', {'form':form})
+            return render(request,'qnaEdit.html', {'form':form, 'qna': qna})
     
 def qnaNew(request):
     return render(request, 'qnaNew.html')

@@ -10,7 +10,9 @@ class CrudUpdate(forms.ModelForm):
         'profile_id': '작성자', 
         'body' : '본문'
         }
-
+        widgets = {
+            'profile_id' : forms.HiddenInput()
+        }
 class InfoUpdate(forms.ModelForm):
     class Meta:
         model = Info
@@ -20,7 +22,9 @@ class InfoUpdate(forms.ModelForm):
         'profile_id': '작성자', 
         'body' : '본문'
         }
-
+        widgets = {
+            'profile_id' : forms.HiddenInput()
+        }
 class QnaUpdate(forms.ModelForm):
     class Meta:
         model = Qna
@@ -30,4 +34,6 @@ class QnaUpdate(forms.ModelForm):
         'profile_id': '작성자', 
         'body' : '본문'
         }
-
+        widgets = {
+            'profile_id' : forms.HiddenInput()
+        }
