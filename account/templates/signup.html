@@ -19,7 +19,8 @@
         #pw,
         #re_pw,
         #major,
-        #age {
+        #age,
+        #term {
             font-size: 18px;
             color: rgb(96, 80, 64);
             text-align: start;
@@ -97,6 +98,9 @@
 
         <div id="major">학과<br></div>
         <input type="text" name="major" />
+
+        <div id="term">기수(n기)<br></div>
+        <input type="number" maxlength="2" name="term" oninput="numberMaxLength(this)" />
 
         <div id="pw">비밀번호<br></div>
         <input type="password" name="password" />

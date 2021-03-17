@@ -50,6 +50,7 @@ def signup(request):
         student_ID = request.POST.get('student_ID', None)
         major = request.POST.get('major', None)
         age = request.POST.get('age', None)
+        term = request.POST.get('term', None)
         password = request.POST.get('password', None)
         re_password = request.POST.get('re_password', None)
 
@@ -75,6 +76,7 @@ def signup(request):
             user_PW = make_password(password),
             major = major,
             age = age,
+            term = term,
             admin = admin
         )
             
